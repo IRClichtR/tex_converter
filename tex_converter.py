@@ -36,7 +36,7 @@ def process_pdf_nwlines(page_text):
             if line.endswith(" ") and next_line and (next_line[0].isalnum() or (next_line[0].isspace() and len(next_line))):
                 processed_text += line.rstrip() + " "
             else:
-                processed_text += line + "\n"
+                processed_text += line + "\n\n"
 
     return processed_text
 
@@ -63,7 +63,7 @@ def docx_to_tex(source_path, tex_path):
 
     with open(tex_path, 'w', encoding='utf-8') as tex_file:
         for para in document.paragraphs:
-            tex_file.write(para.text + '\n')
+            tex_file.write(para.text + "\n")
 
 
 
@@ -77,11 +77,12 @@ print("")
 
 if len(sys.argv) != 2:
      print("Usage: python3 pdf_to_tex.py path/to/the/file")
+     sys.exit(1)
 
 source_path = sys.argv[1]
 if not os.path.exists(source_path):
     print("Path error")
-    exit
+    sys.exit(1)
 
 tex_path = create_tex_path(source_path)
 if get_extension(source_path) == ".pdf":

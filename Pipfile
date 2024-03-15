@@ -4,6 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pypdf2 = "*"
+python-docx = "*"
 
 [dev-packages]
 
